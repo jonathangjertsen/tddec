@@ -83,3 +83,27 @@ void test_noReadFromAddress(void)
     TEST_ASSERT_EQUAL_HEX16(1 << 4, virtualLeds);
 }
 
+void test_isOnReturnsFalseAfterInit(void)
+{
+    TEST_ASSERT_FALSE(LED_IsOn(4));
+}
+
+void test_isOnReturnsTrueAfterTurningOn(void)
+{
+    LED_On(4);
+    TEST_ASSERT_TRUE(LED_IsOn(4));
+}
+
+void test_isOnReturnsFalseAfterTurningOffAgain(void)
+{
+    LED_On(4);
+    LED_Off(4);
+    TEST_ASSERT_FALSE(LED_IsOn(4));
+}
+
+void test_isOnReturnsFalseForOutOfBoundsValue(void)
+{
+    LED_On(1000);
+    TEST_ASSERT_FALSE(LED_IsOn(1000));
+    TEST_ASSERT_EQUAL(1000, ERROR_LastParameter());
+}
