@@ -7,6 +7,6 @@ add_unit_test(
     TARGET_NAME
         test_led_driver
     SOURCE_FILES
-        ${CMAKE_SOURCE_DIR}/src/1_led_driver/test/test_led_driver.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/test/test_led_driver.c
 )
 target_link_libraries(test_led_driver PUBLIC led_driver)
