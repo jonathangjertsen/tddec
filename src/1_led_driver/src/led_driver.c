@@ -12,10 +12,10 @@ void LED_Create(uint16_t *address)
 
 void LED_On(unsigned ledNumber)
 {
-    *g_address = 1;
+    *g_address |= (1 << ledNumber);
 }
 
 void LED_Off(unsigned ledNumber)
 {
-    *g_address = 0;
+    *g_address &=~ (1 << ledNumber);
 }
