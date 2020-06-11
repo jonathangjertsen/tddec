@@ -15,7 +15,7 @@ cbuf_t CBUF_Init(int *data, int capacity)
 
 bool CBUF_IsEmpty(cbuf_t *cbuf)
 {
-    return cbuf->put == cbuf->get;
+    return (cbuf->put == cbuf->get) && !CBUF_IsFull(cbuf);
 }
 
 bool CBUF_IsFull(cbuf_t *cbuf)
@@ -30,7 +30,15 @@ int CBUF_Size(cbuf_t *cbuf)
         return cbuf->capacity;
     }
 
-    return cbuf->put - cbuf->get;
+    if (cbuf->put >= cbuf->get)
+    {
+        return cbuf->put - cbuf->get;
+    }
+    else
+    {
+        return cbuf->capacity - (cbuf->get - cbuf->put);
+    }
+
 }
 
 int CBUF_RemainingCapacity(cbuf_t *cbuf)
@@ -71,7 +79,12 @@ bool CBUF_Get(cbuf_t *cbuf, int *value)
     if (result)
     {
         cbuf->get++;
+        if (cbuf->get >= cbuf->capacity)
+        {
+            cbuf->get = 0;
+        }
     }
+    cbuf->full = false;
     return result;
 }
 

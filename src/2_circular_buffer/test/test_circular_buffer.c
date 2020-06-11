@@ -171,3 +171,59 @@ void test_putToFullBufferReturnsFalse(void)
 
     TEST_ASSERT_FALSE(CBUF_Put(&g_cbuf, 0));
 }
+
+void test_putToCapacityThenGetToEmpty(void)
+{
+    for (int i = 0; i < DATA_SIZE; i++)
+    {
+        TEST_ASSERT_EQUAL(i, CBUF_Size(&g_cbuf));
+        TEST_ASSERT_EQUAL(DATA_SIZE - i, CBUF_RemainingCapacity(&g_cbuf));
+
+        bool result = CBUF_Put(&g_cbuf, i);
+        TEST_ASSERT_TRUE(result);
+    }
+
+    for (int i = 0; i < DATA_SIZE; i++)
+    {
+        TEST_ASSERT_EQUAL(DATA_SIZE - i, CBUF_Size(&g_cbuf));
+        TEST_ASSERT_EQUAL(i, CBUF_RemainingCapacity(&g_cbuf));
+
+        int value = -1;
+        bool result = CBUF_Get(&g_cbuf, &value);
+        TEST_ASSERT_TRUE(result);
+        TEST_ASSERT_EQUAL(i, value);
+    }
+}
+
+void test_putToHalfCapacityThenGetToEmptyThenPutToFull(void)
+{
+    for (int i = 0; i < DATA_SIZE/2; i++)
+    {
+        CBUF_Put(&g_cbuf, i);
+    }
+
+    for (int i = 0; i < DATA_SIZE/2; i++)
+    {
+        int value = -1;
+        bool result = CBUF_Get(&g_cbuf, &value);
+    }
+    TEST_ASSERT_TRUE(CBUF_IsEmpty(&g_cbuf));
+
+    for (int i = 0; i < DATA_SIZE; i++)
+    {
+        bool result = CBUF_Put(&g_cbuf, i);
+        TEST_ASSERT_TRUE(result);
+    }
+    TEST_ASSERT_TRUE(CBUF_IsFull(&g_cbuf));
+
+    for (int i = 0; i < DATA_SIZE; i++)
+    {
+        TEST_ASSERT_EQUAL(DATA_SIZE - i, CBUF_Size(&g_cbuf));
+        TEST_ASSERT_EQUAL(i, CBUF_RemainingCapacity(&g_cbuf));
+
+        int value = -1;
+        bool result = CBUF_Get(&g_cbuf, &value);
+        TEST_ASSERT_TRUE(result);
+        TEST_ASSERT_EQUAL(i, value);
+    }
+}
