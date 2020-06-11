@@ -45,6 +45,11 @@ int CBUF_RemainingCapacity(cbuf_t *cbuf)
 
 bool CBUF_Put(cbuf_t *cbuf, int value)
 {
+    if (cbuf->full)
+    {
+        return false;
+    }
+
     cbuf->data[cbuf->put] = value;
 
     cbuf->put++;
