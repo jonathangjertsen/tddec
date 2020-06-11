@@ -28,3 +28,21 @@ void test_putInEmptyBufferResultsInTrueResult(void)
     bool putResult = CBUF_Put(&g_cbuf, 1);
     TEST_ASSERT_EQUAL(true, putResult);
 }
+
+void test_getFromEmptyBufferResultsInFalseResultAndValueIsNotOverwritten(void)
+{
+    int value = -192;
+    bool putResult = CBUF_Get(&g_cbuf, &value);
+
+    TEST_ASSERT_FALSE(putResult);
+    TEST_ASSERT_EQUAL(value, -192);
+}
+
+void test_peekFromEmptyBufferResultsInFalseResultAndValueIsNotOverwritten(void)
+{
+    int value = -192;
+    bool putResult = CBUF_Peek(&g_cbuf, &value);
+
+    TEST_ASSERT_FALSE(putResult);
+    TEST_ASSERT_EQUAL(value, -192);
+}

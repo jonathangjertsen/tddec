@@ -21,3 +21,13 @@ bool CBUF_Put(cbuf_t *cbuf, int value)
 {
     return true;
 }
+
+bool CBUF_Get(cbuf_t *cbuf, int *value)
+{
+    return false;
+}
+
+bool CBUF_Peek(cbuf_t *cbuf, int *value)
+{
+    return false;
+}
