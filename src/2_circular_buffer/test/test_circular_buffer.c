@@ -17,7 +17,7 @@ void test_emptyAtInit(void)
     TEST_ASSERT_TRUE(CBUF_IsEmpty(&g_cbuf));
 }
 
-void test_zeroSizeAtInit(void)
+void test_sizeIsZeroAtInit(void)
 {
-
+    TEST_ASSERT_EQUAL(0, CBuf_Size(&g_cbuf));
 }
