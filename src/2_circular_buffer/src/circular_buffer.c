@@ -41,7 +41,7 @@ bool CBUF_Put(cbuf_t *cbuf, int value)
 
 bool CBUF_Get(cbuf_t *cbuf, int *value)
 {
-    if (cbuf->get == cbuf->put)
+    if (CBUF_IsEmpty(cbuf))
     {
         return false;
     }
@@ -53,7 +53,7 @@ bool CBUF_Get(cbuf_t *cbuf, int *value)
 
 bool CBUF_Peek(cbuf_t *cbuf, int *value)
 {
-    if (cbuf->get == cbuf->put)
+    if (CBUF_IsEmpty(cbuf))
     {
         return false;
     }
