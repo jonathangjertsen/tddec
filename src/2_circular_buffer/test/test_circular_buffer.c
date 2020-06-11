@@ -72,6 +72,12 @@ void test_putIncrementsSize(void)
     TEST_ASSERT_EQUAL(1, CBUF_Size(&g_cbuf));
 }
 
+void test_putDecrementsCapacity(void)
+{
+    CBUF_Put(&g_cbuf, 1337);
+    TEST_ASSERT_EQUAL(DATA_SIZE - 1, CBUF_RemainingCapacity(&g_cbuf));
+}
+
 void test_getDecrementsSize(void)
 {
     CBUF_Put(&g_cbuf, 1337);
@@ -79,6 +85,15 @@ void test_getDecrementsSize(void)
     CBUF_Get(&g_cbuf, &dummy);
 
     TEST_ASSERT_EQUAL(0, CBUF_Size(&g_cbuf));
+}
+
+void test_getIncrementsCapacity(void)
+{
+    CBUF_Put(&g_cbuf, 1337);
+    int dummy;
+    CBUF_Get(&g_cbuf, &dummy);
+
+    TEST_ASSERT_EQUAL(DATA_SIZE, CBUF_RemainingCapacity(&g_cbuf));
 }
 
 void test_getDoesNotDecrementSizeIfEmpty(void)
@@ -89,6 +104,14 @@ void test_getDoesNotDecrementSizeIfEmpty(void)
     TEST_ASSERT_EQUAL(0, CBUF_Size(&g_cbuf));
 }
 
+void test_getDoesNotIncrementCapacityIfEmpty(void)
+{
+    int dummy;
+    CBUF_Get(&g_cbuf, &dummy);
+
+    TEST_ASSERT_EQUAL(DATA_SIZE, CBUF_RemainingCapacity(&g_cbuf));
+}
+
 void test_peekReturnsResultFromPut(void)
 {
     CBUF_Put(&g_cbuf, 1337);
@@ -96,5 +119,26 @@ void test_peekReturnsResultFromPut(void)
     int value = 0;
     CBUF_Peek(&g_cbuf, &value);
     TEST_ASSERT_EQUAL(value, 1337);
+}
+
+void test_peekIsIdempotent(void)
+{
+    CBUF_Put(&g_cbuf, 1337);
+
+    int value = 0;
+    CBUF_Peek(&g_cbuf, &value);
+    value = 0;
+    CBUF_Peek(&g_cbuf, &value);
+    TEST_ASSERT_EQUAL(value, 1337);
+}
+
+void test_peekDoesNotChangeSizeOrCapacity(void)
+{
+    CBUF_Put(&g_cbuf, 1337);
+
+    int value = 0;
+    CBUF_Peek(&g_cbuf, &value);
+    TEST_ASSERT_EQUAL(1, CBUF_Size(&g_cbuf));
+    TEST_ASSERT_EQUAL(DATA_SIZE - 1, CBUF_RemainingCapacity(&g_cbuf));
 }
 
