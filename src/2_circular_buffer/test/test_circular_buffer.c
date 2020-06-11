@@ -1,10 +1,23 @@
 #include <circular_buffer.h>
 #include <unity.h>
+#include <string.h>
 
-void test_emptyAtInit()
+#define DATA_SIZE 800
+
+int g_data[DATA_SIZE];
+static cbuf_t g_cbuf;
+
+void setUp(void)
 {
-    int data[800];
+    g_cbuf = CBUF_Init(g_data, DATA_SIZE);
+}
 
-    cbuf_t cbuf = CBUF_Init(data, 800);
-    TEST_ASSERT_TRUE(CBUF_IsEmpty(&cbuf));
+void test_emptyAtInit(void)
+{
+    TEST_ASSERT_TRUE(CBUF_IsEmpty(&g_cbuf));
+}
+
+void test_zeroSizeAtInit(void)
+{
+
 }
