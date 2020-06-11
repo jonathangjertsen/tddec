@@ -16,3 +16,8 @@ int CBuf_Size(cbuf_t *cbuf)
 {
     return 0;
 }
+
+bool CBUF_Put(cbuf_t *cbuf, int value)
+{
+    return true;
+}

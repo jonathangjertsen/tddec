@@ -1,5 +1,6 @@
 #include <circular_buffer.h>
 #include <unity.h>
+#include <stdbool.h>
 #include <string.h>
 
 #define DATA_SIZE 800
@@ -20,4 +21,10 @@ void test_emptyAtInit(void)
 void test_sizeIsZeroAtInit(void)
 {
     TEST_ASSERT_EQUAL(0, CBuf_Size(&g_cbuf));
+}
+
+void test_putInEmptyBufferResultsInTrueResult(void)
+{
+    bool putResult = CBUF_Put(&g_cbuf, 1);
+    TEST_ASSERT_EQUAL(true, putResult);
 }
