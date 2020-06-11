@@ -12,7 +12,7 @@ bool CBUF_IsEmpty(cbuf_t *cbuf)
     return true;
 }
 
-int CBuf_Size(cbuf_t *cbuf)
+int CBUF_Size(cbuf_t *cbuf)
 {
     return 0;
 }

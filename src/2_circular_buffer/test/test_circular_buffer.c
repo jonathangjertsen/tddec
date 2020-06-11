@@ -20,7 +20,7 @@ void test_emptyAtInit(void)
 
 void test_sizeIsZeroAtInit(void)
 {
-    TEST_ASSERT_EQUAL(0, CBuf_Size(&g_cbuf));
+    TEST_ASSERT_EQUAL(0, CBUF_Size(&g_cbuf));
 }
 
 void test_putInEmptyBufferResultsInTrueResult(void)
