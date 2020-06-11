@@ -1,0 +1,12 @@
+# Add target for the library
+add_library(led_driver src/led_driver.c)
+target_include_directories(led_driver PUBLIC inc)
+
+# Add the unit test
+add_unit_test(
+    TARGET_NAME
+        test_led_driver
+    SOURCE_FILES
+        ${CMAKE_SOURCE_DIR}/src/1_led_driver/test/test_led_driver.c
+)
+target_link_libraries(test_led_driver PUBLIC led_driver)
