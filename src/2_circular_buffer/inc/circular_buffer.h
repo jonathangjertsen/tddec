@@ -13,6 +13,7 @@ typedef struct cbuf_t {
 
 cbuf_t CBUF_Init(int *data, int capacity);
 bool CBUF_IsEmpty(cbuf_t *cbuf);
+bool CBUF_IsFull(cbuf_t *cbuf);
 int CBUF_Size(cbuf_t *cbuf);
 bool CBUF_Put(cbuf_t *cbuf, int value);
 bool CBUF_Get(cbuf_t *cbuf, int *value);

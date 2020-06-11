@@ -18,6 +18,11 @@ void test_emptyAtInit(void)
     TEST_ASSERT_TRUE(CBUF_IsEmpty(&g_cbuf));
 }
 
+void test_notFullAtInit(void)
+{
+    TEST_ASSERT_FALSE(CBUF_IsFull(&g_cbuf));
+}
+
 void test_sizeIsZeroAtInit(void)
 {
     TEST_ASSERT_EQUAL(0, CBUF_Size(&g_cbuf));
