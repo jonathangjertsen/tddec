@@ -41,14 +41,12 @@ bool CBUF_Put(cbuf_t *cbuf, int value)
 
 bool CBUF_Get(cbuf_t *cbuf, int *value)
 {
-    if (CBUF_IsEmpty(cbuf))
+    bool result = CBUF_Peek(cbuf, value);
+    if (result)
     {
-        return false;
+        cbuf->get++;
     }
-
-    *value = cbuf->data[cbuf->get];
-    cbuf->get++;
-    return true;
+    return result;
 }
 
 bool CBUF_Peek(cbuf_t *cbuf, int *value)
