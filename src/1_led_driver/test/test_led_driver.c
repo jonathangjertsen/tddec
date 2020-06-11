@@ -59,6 +59,18 @@ void test_turnAllOnAndSomeOff(void)
     TEST_ASSERT_EQUAL_HEX16(0b0111111111101101, virtualLeds);
 }
 
+void test_turnOffOutOfBoundsValue(void)
+{
+    for (int i = 0; i < 16; i++)
+    {
+        LED_On(i);
+    }
+    LED_Off(999);
+
+    TEST_ASSERT_EQUAL_HEX16(0b1111111111111111, virtualLeds);
+}
+
+
 void test_noReadFromAddress(void)
 {
     virtualLeds = 0xffff;
