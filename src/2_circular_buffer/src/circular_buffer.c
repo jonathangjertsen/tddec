@@ -27,6 +27,11 @@ int CBUF_Size(cbuf_t *cbuf)
     return cbuf->put - cbuf->get;
 }
 
+int CBUF_RemainingCapacity(cbuf_t *cbuf)
+{
+    return cbuf->capacity - CBUF_Size(cbuf);
+}
+
 bool CBUF_Put(cbuf_t *cbuf, int value)
 {
     cbuf->data[cbuf->put] = value;

@@ -28,6 +28,11 @@ void test_sizeIsZeroAtInit(void)
     TEST_ASSERT_EQUAL(0, CBUF_Size(&g_cbuf));
 }
 
+void test_remainingCapacityIsCorrectAtInit(void)
+{
+    TEST_ASSERT_EQUAL(DATA_SIZE, CBUF_RemainingCapacity(&g_cbuf));
+}
+
 void test_putInEmptyBufferResultsInTrueResult(void)
 {
     bool putResult = CBUF_Put(&g_cbuf, 1);
