@@ -60,3 +60,9 @@ void test_getReturnsResultFromPut(void)
     CBUF_Get(&g_cbuf, &value);
     TEST_ASSERT_EQUAL(value, 1337);
 }
+
+void test_putIncrementsSize(void)
+{
+    CBUF_Put(&g_cbuf, 1337);
+    TEST_ASSERT_EQUAL(1, CBUF_Size(&g_cbuf));
+}

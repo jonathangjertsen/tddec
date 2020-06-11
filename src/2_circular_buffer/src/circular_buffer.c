@@ -24,7 +24,7 @@ bool CBUF_IsFull(cbuf_t *cbuf)
 
 int CBUF_Size(cbuf_t *cbuf)
 {
-    return 0;
+    return cbuf->put - cbuf->get;
 }
 
 bool CBUF_Put(cbuf_t *cbuf, int value)
