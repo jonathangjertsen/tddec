@@ -14,7 +14,7 @@ cbuf_t CBUF_Init(int *data, int capacity)
 
 bool CBUF_IsEmpty(cbuf_t *cbuf)
 {
-    return true;
+    return cbuf->put == cbuf->get;
 }
 
 bool CBUF_IsFull(cbuf_t *cbuf)

@@ -78,6 +78,12 @@ void test_putDecrementsCapacity(void)
     TEST_ASSERT_EQUAL(DATA_SIZE - 1, CBUF_RemainingCapacity(&g_cbuf));
 }
 
+void test_putFalsifiesIsEmpty(void)
+{
+    CBUF_Put(&g_cbuf, 1337);
+    TEST_ASSERT_FALSE(CBUF_IsEmpty(&g_cbuf));
+}
+
 void test_getDecrementsSize(void)
 {
     CBUF_Put(&g_cbuf, 1337);
