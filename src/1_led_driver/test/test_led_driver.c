@@ -49,3 +49,11 @@ void test_turnAllOnAndSomeOff(void)
 
     TEST_ASSERT_EQUAL_HEX16(0b0111111111101101, virtualLeds);
 }
+
+void test_noReadFromAddress(void)
+{
+    virtualLeds = 0xffff;
+    LED_On(4);
+    LED_Off(7);
+    TEST_ASSERT_EQUAL_HEX16(1 << 4, virtualLeds);
+}
