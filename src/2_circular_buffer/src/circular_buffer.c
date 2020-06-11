@@ -48,5 +48,11 @@ bool CBUF_Get(cbuf_t *cbuf, int *value)
 
 bool CBUF_Peek(cbuf_t *cbuf, int *value)
 {
-    return false;
+    if (cbuf->get == cbuf->put)
+    {
+        return false;
+    }
+
+    *value = cbuf->data[cbuf->get];
+    return true;
 }
