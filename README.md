@@ -1,5 +1,7 @@
 # Test-driven development for embedded C with Unity and CTest
 
+[![Build Status](https://travis-ci.com/jonathangjertsen/tddec.svg?branch=master)](https://travis-ci.com/jonathangjertsen/tddec)
+
 ## Prerequisites
 
 * `cmake`: https://cmake.org/download/
