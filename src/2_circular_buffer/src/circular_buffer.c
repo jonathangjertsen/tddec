@@ -3,7 +3,12 @@
 
 cbuf_t CBUF_Init(int *data, int capacity)
 {
-    cbuf_t cbuf;
+    cbuf_t cbuf = {
+        .put = 0,
+        .get = 0,
+        .capacity = capacity,
+        .data = data,
+    };
     return cbuf;
 }
 
@@ -24,12 +29,21 @@ int CBUF_Size(cbuf_t *cbuf)
 
 bool CBUF_Put(cbuf_t *cbuf, int value)
 {
+    cbuf->data[cbuf->put] = value;
+    cbuf->put++;
     return true;
 }
 
 bool CBUF_Get(cbuf_t *cbuf, int *value)
 {
-    return false;
+    if (cbuf->get == cbuf->put)
+    {
+        return false;
+    }
+
+    *value = cbuf->data[cbuf->get];
+    cbuf->get++;
+    return true;
 }
 
 bool CBUF_Peek(cbuf_t *cbuf, int *value)

@@ -51,3 +51,12 @@ void test_peekFromEmptyBufferResultsInFalseResultAndValueIsNotOverwritten(void)
     TEST_ASSERT_FALSE(putResult);
     TEST_ASSERT_EQUAL(value, -192);
 }
+
+void test_getReturnsResultFromPut(void)
+{
+    CBUF_Put(&g_cbuf, 1337);
+
+    int value = 0;
+    CBUF_Get(&g_cbuf, &value);
+    TEST_ASSERT_EQUAL(value, 1337);
+}
