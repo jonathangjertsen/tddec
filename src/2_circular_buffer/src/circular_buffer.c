@@ -1,7 +1,7 @@
 #include <circular_buffer.h>
 #include <stdbool.h>
 
-cbuf_t CBUF_Init(void)
+cbuf_t CBUF_Init(int *data, int capacity)
 {
     cbuf_t cbuf;
     return cbuf;
