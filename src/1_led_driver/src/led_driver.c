@@ -14,3 +14,8 @@ void LED_On(unsigned ledNumber)
 {
     *g_address = 1;
 }
+
+void LED_Off(unsigned ledNumber)
+{
+    *g_address = 0;
+}
