@@ -10,6 +10,9 @@ typedef struct cbuf_t {
     // The capacity of the data store
     int capacity;
 
+    // Whether the buffer is full
+    bool full;
+
     // Where CBUF_Put will put the data
     int put;
 

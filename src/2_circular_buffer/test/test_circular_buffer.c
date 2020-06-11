@@ -148,3 +148,15 @@ void test_peekDoesNotChangeSizeOrCapacity(void)
     TEST_ASSERT_EQUAL(DATA_SIZE - 1, CBUF_RemainingCapacity(&g_cbuf));
 }
 
+void test_putToCapacity(void)
+{
+    for (int i = 0; i < DATA_SIZE; i++)
+    {
+        bool result = CBUF_Put(&g_cbuf, i);
+        TEST_ASSERT_TRUE(result);
+    }
+
+    TEST_ASSERT_EQUAL(0, CBUF_RemainingCapacity(&g_cbuf));
+    TEST_ASSERT_EQUAL(DATA_SIZE, CBUF_Size(&g_cbuf));
+    TEST_ASSERT_TRUE(CBUF_IsFull(&g_cbuf));
+}

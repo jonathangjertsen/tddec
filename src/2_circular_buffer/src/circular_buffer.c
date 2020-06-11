@@ -6,6 +6,7 @@ cbuf_t CBUF_Init(int *data, int capacity)
     cbuf_t cbuf = {
         .put = 0,
         .get = 0,
+        .full = false,
         .capacity = capacity,
         .data = data,
     };
@@ -19,23 +20,43 @@ bool CBUF_IsEmpty(cbuf_t *cbuf)
 
 bool CBUF_IsFull(cbuf_t *cbuf)
 {
-    return false;
+    return cbuf->full;
 }
 
 int CBUF_Size(cbuf_t *cbuf)
 {
+    if (cbuf->full)
+    {
+        return cbuf->capacity;
+    }
+
     return cbuf->put - cbuf->get;
 }
 
 int CBUF_RemainingCapacity(cbuf_t *cbuf)
 {
+    if (cbuf->full)
+    {
+        return 0;
+    }
+
     return cbuf->capacity - CBUF_Size(cbuf);
 }
 
 bool CBUF_Put(cbuf_t *cbuf, int value)
 {
     cbuf->data[cbuf->put] = value;
+
     cbuf->put++;
+    if (cbuf->put >= cbuf->capacity)
+    {
+        cbuf->put = 0;
+    }
+    if (cbuf->put == cbuf->get)
+    {
+        cbuf->full = true;
+    }
+
     return true;
 }
 
