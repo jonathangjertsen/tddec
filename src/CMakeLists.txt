@@ -1,3 +1,4 @@
 add_subdirectory(0_minimal)
 add_subdirectory(1_led_driver)
 add_subdirectory(2_circular_buffer)
+add_subdirectory(3_error_handler)

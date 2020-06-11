@@ -1,4 +1,5 @@
 #include <led_driver.h>
+#include <error_handler.h>
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -14,7 +15,6 @@ bool isValidLed(unsigned ledNumber)
     return (ledNumber >= 0) && (ledNumber < 16);
 }
 
-
 void LED_Create(uint16_t *address)
 {
     g_image = 0;
@@ -28,6 +28,10 @@ void LED_On(unsigned ledNumber)
     {
         g_image |= (1 << ledNumber);
     }
+    else
+    {
+        ERROR("LED out of bounds", ledNumber);
+    }
     *g_address = g_image;
 }
 
@@ -36,6 +40,10 @@ void LED_Off(unsigned ledNumber)
     if (isValidLed(ledNumber))
     {
         g_image &=~ (1 << ledNumber);
+    }
+    else
+    {
+        ERROR("LED out of bounds", ledNumber);
     }
     *g_address = g_image;
 }

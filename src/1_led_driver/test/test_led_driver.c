@@ -1,4 +1,5 @@
 #include <led_driver.h>
+#include <error_handler_mock.h>
 #include <unity.h>
 #include <stdint.h>
 
@@ -6,6 +7,8 @@ static uint16_t virtualLeds;
 
 void setUp(void)
 {
+    ERROR_ResetMock();
+
     LED_Create(&virtualLeds);
 }
 
@@ -37,6 +40,7 @@ void test_turnOnOobValue(void)
     LED_On(15);
     LED_On(999);
     TEST_ASSERT_EQUAL_HEX16(0b1000000000010010, virtualLeds);
+    TEST_ASSERT_EQUAL(999, ERROR_LastParameter());
 }
 
 void test_turnOff(void)
@@ -65,11 +69,11 @@ void test_turnOffOutOfBoundsValue(void)
     {
         LED_On(i);
     }
-    LED_Off(999);
+    LED_Off(1337);
 
     TEST_ASSERT_EQUAL_HEX16(0b1111111111111111, virtualLeds);
+    TEST_ASSERT_EQUAL(1337, ERROR_LastParameter());
 }
-
 
 void test_noReadFromAddress(void)
 {
