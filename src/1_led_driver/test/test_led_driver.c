@@ -30,6 +30,15 @@ void test_turnOnMultiple(void)
     TEST_ASSERT_EQUAL_HEX16(0b1000000000010010, virtualLeds);
 }
 
+void test_turnOnOobValue(void)
+{
+    LED_On(1);
+    LED_On(4);
+    LED_On(15);
+    LED_On(999);
+    TEST_ASSERT_EQUAL_HEX16(0b1000000000010010, virtualLeds);
+}
+
 void test_turnOff(void)
 {
     LED_On(1);
@@ -57,3 +66,4 @@ void test_noReadFromAddress(void)
     LED_Off(7);
     TEST_ASSERT_EQUAL_HEX16(1 << 4, virtualLeds);
 }
+
