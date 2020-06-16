@@ -8,8 +8,7 @@ This is being written as part of the book club in the Slack channel for Patreons
 [Embedded FM](https://embedded.fm/), where we are reading
 *Test-Driven Development for Embedded C* by James Grenning.
 
-We are currently on Week 1 which covers chapters 2 and 3.
-At this point, all implementations are hard-coded and incorrect.
+We are currently on Week 2 which covers chapters 4.
 
 ## Prerequisites
 
