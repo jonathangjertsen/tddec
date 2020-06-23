@@ -12,28 +12,33 @@ We are currently on Week 2 which covers chapters 4.
 
 ## Prerequisites
 
+On Mac OSX, you should only need to install:
+
 * `cmake`: https://cmake.org/download/
+
+On Windows (and Linux, depending on your distribution), you also need:
+
 * `ruby`: https://www.ruby-lang.org/en/downloads/
 * A build system. `make` is common, I find `ninja` to be the most useful on Windows: https://ninja-build.org/manual.html
 * A C compiler (on Windows, the gcc bundled with ruby should work! It lives in `msys64/mingw64/bin` in the Ruby installation).
 
 ## Get started
 
+### Windows/ninja
+
 After installing the prerequisites, this should work for both Windows CMD and bash:
 
 ```
-git clone https://github.com/jonathangjertsen/tddec.git
+git clone --recurse-submodules https://github.com/jonathangjertsen/tddec.git
 cd tddec
-git submodule init
-git submodule update
 mkdir build
 cd build
 cmake .. -G Ninja
 ninja ctest
-
 ```
 
-After running `ninja ctest`, you should see something like:
+
+After running `ninja ctest` (or `make ctest`, you should see something like:
 
 ```
 test 1
@@ -62,4 +67,15 @@ test 2
 100% tests passed, 0 tests failed out of 2
 
 Total Test time (real) =   0.02 sec
+```
+
+### Mac OSX
+
+```
+git clone --recurse-submodules https://github.com/jonathangjertsen/tddec.git
+cd tddec
+mkdir build
+cd build
+cmake ..
+make ctest
 ```
