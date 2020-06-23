@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 #ifndef CIRCULAR_BUFFER_DTYPE
-#define CIRCULAR_BUFFER_DTYPE unsigned
+#define CIRCULAR_BUFFER_DTYPE int
 #endif
 
 typedef CIRCULAR_BUFFER_DTYPE cbuf_elem_t;
